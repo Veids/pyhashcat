@@ -498,11 +498,7 @@ static void *hc_session_exe_thread(void *params)
 {
 
  hashcatObject *self = (hashcatObject *) params;
- int rtn;
- rtn = hashcat_session_execute(self->hashcat_ctx);
-
- if(rtn)
-  rtn = rtn;
+ hashcat_session_execute(self->hashcat_ctx);
 
  return NULL;
 
