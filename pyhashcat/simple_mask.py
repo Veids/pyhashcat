@@ -41,16 +41,19 @@ print("[!] cb_id finished: ", hc.event_connect(callback=finished_callback, signa
 #print("[!] cb_id any: ", hc.event_connect(callback=any_callback, signal="ANY"))
 
 
-#hc.hash = "8743b52063cd84097a65d1633f5c74f5"
-hc.hash = 'admin::N46iSNekpT:08ca45b7d7ea58ee:88dcbe4446168966a153a0064958dac6:5c7830315c7830310000000000000b45c67103d07d7b95acd12ffa11230e0000000052920b85f78d013c31cdb3b92f5d765c783030'
-hc.mask = "?l?l?l?l?l?l?l"
-hc.quiet = True
-hc.username = True
+hc.hash = "b89eaac7e61417341b710b727768294d0e6a277b"
+#hc.hash = "admin::N46iSNekpT:08ca45b7d7ea58ee:88dcbe4446168966a153a0064958dac6:5c7830315c7830310000000000000b45c67103d07d7b95acd12ffa11230e0000000052920b85f78d013c31cdb3b92f5d765c783030"
+#hc.mask = "?l?l?l?l?l?l?l"
+hc.mask = "hashca?l"
+hc.quiet = False
+hc.username = False
+#hc.username = True
 hc.potfile_disable = True
 hc.outfile = os.path.join(os.path.expanduser('~'), "outfile.txt")
 print("[+] Writing to ", hc.outfile)
 hc.attack_mode = 3
-hc.hash_mode = 5600
+hc.hash_mode = 100
+#hc.hash_mode = 5600
 hc.workload_profile = 2
 
 cracked = []

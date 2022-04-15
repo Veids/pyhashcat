@@ -5027,7 +5027,7 @@ PyDoc_STRVAR(separator__doc__,
 static PyObject *hashcat_getseparator(hashcatObject * self)
 {
 
-  return Py_BuildValue("c", self->user_options->separator);
+  return Py_BuildValue("s", self->user_options->separator);
 
 }
 
@@ -5049,11 +5049,7 @@ static int hashcat_setseparator(hashcatObject * self, PyObject * value, void *cl
     return -1;
   }
 
-  char sep;
-
-  sep = (PyUnicode_ReadChar(value, 0));
-
-  self->user_options->separator = (char) sep;
+  self->user_options->separator = (char *) PyUnicode_AsUTF8 (value);
 
   return 0;
 
