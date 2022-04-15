@@ -907,33 +907,6 @@ static PyObject *hashcat_status_get_status (hashcatObject * self, PyObject * noa
 PyDoc_STRVAR(hashcat_list_hashmodes__doc__,
 "Return dictionary containing all hash modes\n\n");
 
-typedef struct usage_sort
-{
-  u32   hash_mode;
-  char *hash_name;
-  u32   hash_category;
-
-} usage_sort_t;
-
-static int sort_by_usage (const void *p1, const void *p2)
-{
-  const usage_sort_t *u1 = (const usage_sort_t *) p1;
-  const usage_sort_t *u2 = (const usage_sort_t *) p2;
-
-  if (u1->hash_category > u2->hash_category) return  1;
-  if (u1->hash_category < u2->hash_category) return -1;
-
-  const int rc_name = strncmp (u1->hash_name + 1, u2->hash_name + 1, 15); // yes, strange...
-
-  if (rc_name > 0) return  1;
-  if (rc_name < 0) return -1;
-
-  if (u1->hash_mode > u2->hash_mode) return  1;
-  if (u1->hash_mode < u2->hash_mode) return -1;
-
-  return 0;
-}
-
 static PyObject *hashcat_list_hashmodes (hashcatObject * self, PyObject * noargs)
 {
   const folder_config_t *folder_config = self->hashcat_ctx->folder_config;
