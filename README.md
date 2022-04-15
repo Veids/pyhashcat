@@ -1,26 +1,20 @@
 # pyhashcat
 
-Python bindings for hashcat
-------
-Python C API binding to libhashcat, originally written by Rich5. Updated to use the latest Hashcat version, with additional functionality added. 
+Python C API binding to libhashcat, originally written by @Rich5, updated by @initiate6 and upgraded by @f0cker:
+- https://github.com/Rich5/pyhashcat
+- https://github.com/initiate6/pyhashcat
+- https://github.com/f0cker/pyhashcat
 
-
-Pulled from here: https://github.com/Rich5/pyhashcat/tree/master/pyhashcat
-and ported to Python v3 here: https://github.com/initiate6/pyhashcat/tree/master/pyhashcat
-
-pyhashcat has been completely rewritten as a Python C extension to interface directly with libhashcat. The pyhashcat module now acts as direct bindings to hashcat.
-
-VERSION: 3.0
-
+This is a working directory for an attempt to port/fix from Python 3.7 and hashcat 6.1.x to Python 3.8+ and hashcat 6.2.5+. 
 
 Requirements: 
-* libhashcat 6.1.1
-* Python 3.6+
+* hashcat 6.2.5
+* Python 3.8+
 
 ### Install libhashcat and pyhashcat:
 
 ```
-git clone https://github.com/Rich5/pyHashcat.git
+git https://github.com/securechicken/pyhashcat
 cd pyhashcat/pyhashcat
 git clone https://github.com/hashcat/hashcat.git
 cd hashcat/
