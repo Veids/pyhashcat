@@ -6196,10 +6196,12 @@ PyMODINIT_FUNC PyInit_pyhashcat(void)
 
   PyObject *m;
 
+  #if PY_VERSION_HEX < 0x03070000
   if(!PyEval_ThreadsInitialized())
   {
     PyEval_InitThreads();
   }
+  #endif
 
   if (PyType_Ready(&hashcat_Type) < 0)
     return NULL;
