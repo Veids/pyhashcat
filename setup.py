@@ -1,17 +1,20 @@
-# 
+# Pyhashcat setup module
 
-from distutils.core import setup, Extension
+#from distutils.core import setup, Extension
+from setuptools import setup, Extension
 import sys
 import os
 
 DEFAULT_EXT_NAME = "pyhashcat"
 DEFAULT_EXT_VERS = "4.0"
+DEFAULT_EXT_DESC = "Python bindings for hashcat"
 ENV_DIR_MY_SOURCES = "MY_SOURCES"
 ENV_DIR_HC_SOURCES_DIR = "HC_SOURCES_DIR"
 ENV_DIR_HC_LIB_DIR = "HC_LIB_DIR"
 DEFAULT_MY_SOURCES_DIR = "./"
 DEFAULT_HC_SOURCES_DIR = "./hashcat"
 DEFAULT_HC_LIB_DIR = "/usr/local/lib"
+DEFAULT_HC_ADD_CFLAGS = ["-DWITH_BRAIN", "-DWITH_CUBIN", "-DWITH_HWMON"]
 NAMEHINT_HC_LIB = "libhashcat."
 MY_SOURCES_FILES = [
 	"pyhashcat.c",
@@ -94,27 +97,33 @@ print("Hashcat sources dirs:")
 for i in hc_includes:
 	print(f"\t{i}")
 
-hc_lib_linkinc = f":{hc_lib}"
-if sys.platform == "darwin":
-	from distutils import sysconfig
-	vars = sysconfig.get_config_vars()
-	vars['LDSHARED'] = vars['LDSHARED'].replace('-bundle', '-dynamiclib')
-	hc_lib_linkinc = os.path.splitext(hc_lib)[0].lstrip("lib")
+hc_libs_linkinc = None
+hc_extra_linkargs = None
+if sys.platform == "linux":
+	hc_libs_linkinc = ["stdc++", "pthread", "dl", "rt", "m", f":{hc_lib}"]
+	hc_extra_linkargs = ["-shared"]
+elif sys.platform == "darwin":
+	hc_libs_linkinc = ["stdc++", "pthread", "iconv", os.path.splitext(hc_lib)[0].lstrip("lib")]
+	hc_extra_linkargs = ["-framework", "CoreFoundation", "-framework", "Foundation", "-framework", "IOKit", "-framework", "CoreGraphics", "-framework", "Metal"]
+else:
+	print("pyhashcat building is currently only supported on Linux and macOS", file=sys.stderr)
+	sys.exit(20)
+
 print(f"Building on '{sys.platform}'")
 
 pyhashcat_module = 	Extension(
 						DEFAULT_EXT_NAME,
 						sources = my_files,
 						include_dirs = hc_includes,
-						extra_compile_args=["-DWITH_BRAIN", "-DWITH_CUBIN", "-DWITH_HWMON"],
+						extra_compile_args = DEFAULT_HC_ADD_CFLAGS,
 						library_dirs = [hc_lib_dir],
-						libraries = [hc_lib_linkinc],
-						extra_link_args = ["-shared"],
+						libraries = hc_libs_linkinc,
+						extra_link_args = hc_extra_linkargs,
 					)
 
 setup(
 	name = DEFAULT_EXT_NAME,
 	version = DEFAULT_EXT_VERS,
-	description='Python bindings for hashcat',
+	description = DEFAULT_EXT_DESC,
 	ext_modules = [pyhashcat_module]
 )
