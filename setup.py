@@ -1,6 +1,5 @@
 # Pyhashcat setup module
 
-#from distutils.core import setup, Extension
 from setuptools import setup, Extension
 import sys
 import os
