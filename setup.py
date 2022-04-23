@@ -17,7 +17,6 @@ MY_SOURCES_FILES = [
 	"pyhashcat.c",
 ]
 HC_REL_INCLUDES = [
-	"",
 	"include",
 	"OpenCL",
 	"deps/OpenCL-Headers",
@@ -25,6 +24,7 @@ HC_REL_INCLUDES = [
 	"deps/zlib/contrib",
 	"deps/LZMA-SDK/C",
 	"deps/xxHash",
+	"deps/unrar"
 ]
 
 def buildmyfiles(my_sources_dir, relfiles):
@@ -94,10 +94,12 @@ print("Hashcat sources dirs:")
 for i in hc_includes:
 	print(f"\t{i}")
 
-#if sys.platform == "darwin":
-#	from distutils import sysconfig
-#	vars = sysconfig.get_config_vars()
-#	vars['LDSHARED'] = vars['LDSHARED'].replace('-bundle', '-dynamiclib')
+hc_lib_linkinc = f":{hc_lib}"
+if sys.platform == "darwin":
+	from distutils import sysconfig
+	vars = sysconfig.get_config_vars()
+	vars['LDSHARED'] = vars['LDSHARED'].replace('-bundle', '-dynamiclib')
+	hc_lib_linkinc = os.path.splitext(hc_lib)[0].lstrip("lib")
 print(f"Building on '{sys.platform}'")
 
 pyhashcat_module = 	Extension(
@@ -106,10 +108,8 @@ pyhashcat_module = 	Extension(
 						include_dirs = hc_includes,
 						extra_compile_args=["-DWITH_BRAIN", "-DWITH_CUBIN", "-DWITH_HWMON"],
 						library_dirs = [hc_lib_dir],
-						libraries = [f":{hc_lib}"],
-						#libraries = ["hashcat.6.2.5"],
+						libraries = [hc_lib_linkinc],
 						extra_link_args = ["-shared"],
-						#extra_link_args = ["-shared", f"-Wl,-R{hc_lib_dir}"],
 					)
 
 setup(

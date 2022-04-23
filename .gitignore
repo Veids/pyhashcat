@@ -2,10 +2,12 @@
 *.pyc
 *.__pycache
 build*
+dist*
+pyhashcat.*
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 sys_benchmark.txt
-pyhashcat/hashcat/
+hashcat/
