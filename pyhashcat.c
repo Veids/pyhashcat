@@ -805,7 +805,7 @@ static PyObject *hashcat_hashcat_session_bypass (hashcatObject * self, PyObject 
 
 PyDoc_STRVAR(hashcat_session_checkpoint__doc__,
 "hashcat_session_checkpoint -> int\n\n\
-Stop at next restore point. This feature is disabled when restore_disabled is specified, and will return error\n\n\
+Stop at next restore point. This feature is disabled when restore_enabled is specified, and will return error\n\n\
 Return 0 on success, -1 on error");
 
 static PyObject *hashcat_hashcat_session_checkpoint (hashcatObject * self, PyObject * noargs)
@@ -2754,32 +2754,32 @@ static int hashcat_sethwmon_temp_abort (hashcatObject * self, PyObject * value, 
 
 }
 
-PyDoc_STRVAR(hwmon_disable__doc__,
-"hwmon_disable\tbool\tDisable temperature and fanspeed reads and triggers\n\n");
+PyDoc_STRVAR(hwmon__doc__,
+"hwmon\tbool\tDisable temperature and fanspeed reads and triggers\n\n");
 
-// getter - hwmon_disable
-static PyObject *hashcat_gethwmon_disable (hashcatObject * self)
+// getter - hwmon
+static PyObject *hashcat_gethwmon (hashcatObject * self)
 {
 
-  return PyBool_FromLong (self->user_options->hwmon_disable);
+  return PyBool_FromLong (self->user_options->hwmon);
 
 }
 
-// setter - hwmon_disable
-static int hashcat_sethwmon_disable (hashcatObject * self, PyObject * value, void *closure)
+// setter - hwmon
+static int hashcat_sethwmon (hashcatObject * self, PyObject * value, void *closure)
 {
 
   if (value == NULL)
   {
 
-    PyErr_SetString (PyExc_TypeError, "Cannot delete hwmon_disable attribute");
+    PyErr_SetString (PyExc_TypeError, "Cannot delete hwmon attribute");
     return -1;
   }
 
   if (!PyBool_Check (value))
   {
 
-    PyErr_SetString (PyExc_TypeError, "The hwmon_disable attribute value must be a bool");
+    PyErr_SetString (PyExc_TypeError, "The hwmon attribute value must be a bool");
     return -1;
   }
 
@@ -2787,14 +2787,14 @@ static int hashcat_sethwmon_disable (hashcatObject * self, PyObject * value, voi
   {
 
     Py_INCREF (value);
-    self->user_options->hwmon_disable = 1;
+    self->user_options->hwmon = 1;
 
   }
   else
   {
 
     Py_INCREF (value);
-    self->user_options->hwmon_disable = 0;
+    self->user_options->hwmon = 0;
 
   }
 
@@ -3424,32 +3424,32 @@ static int hashcat_setlimit (hashcatObject * self, PyObject * value, void *closu
 }
 
 
-PyDoc_STRVAR(logfile_disable__doc__,
-"logfile_disable\tbool\tDisable the logfile\n\n");
+PyDoc_STRVAR(logfile__doc__,
+"logfile\tbool\tDisable the logfile\n\n");
 
-// getter - logfile_disable
-static PyObject *hashcat_getlogfile_disable (hashcatObject * self)
+// getter - logfile
+static PyObject *hashcat_getlogfile (hashcatObject * self)
 {
 
-  return PyBool_FromLong (self->user_options->logfile_disable);
+  return PyBool_FromLong (self->user_options->logfile);
 
 }
 
-// setter - logfile_disable
-static int hashcat_setlogfile_disable (hashcatObject * self, PyObject * value, void *closure)
+// setter - logfile
+static int hashcat_setlogfile (hashcatObject * self, PyObject * value, void *closure)
 {
 
   if (value == NULL)
   {
 
-    PyErr_SetString (PyExc_TypeError, "Cannot delete logfile_disable attribute");
+    PyErr_SetString (PyExc_TypeError, "Cannot delete logfile attribute");
     return -1;
   }
 
   if (!PyBool_Check (value))
   {
 
-    PyErr_SetString (PyExc_TypeError, "The logfile_disable attribute value must be a bool");
+    PyErr_SetString (PyExc_TypeError, "The logfile attribute value must be a bool");
     return -1;
   }
 
@@ -3457,14 +3457,14 @@ static int hashcat_setlogfile_disable (hashcatObject * self, PyObject * value, v
   {
 
     Py_INCREF (value);
-    self->user_options->logfile_disable = 1;
+    self->user_options->logfile = 1;
 
   }
   else
   {
 
     Py_INCREF (value);
-    self->user_options->logfile_disable = 0;
+    self->user_options->logfile = 0;
 
   }
 
@@ -3627,32 +3627,32 @@ static int hashcat_setmarkov_classic (hashcatObject * self, PyObject * value, vo
 
 }
 
-PyDoc_STRVAR(markov_disable__doc__,
-"markov_disable\tbool\tDisables markov-chains, emulates classic brute-force\n\n");
+PyDoc_STRVAR(markov__doc__,
+"markov\tbool\tDisables markov-chains, emulates classic brute-force\n\n");
 
-// getter - markov_disable
-static PyObject *hashcat_getmarkov_disable (hashcatObject * self)
+// getter - markov
+static PyObject *hashcat_getmarkov (hashcatObject * self)
 {
 
-  return PyBool_FromLong (self->user_options->markov_disable);
+  return PyBool_FromLong (self->user_options->markov);
 
 }
 
-// setter - markov_disable
-static int hashcat_setmarkov_disable (hashcatObject * self, PyObject * value, void *closure)
+// setter - markov
+static int hashcat_setmarkov (hashcatObject * self, PyObject * value, void *closure)
 {
 
   if (value == NULL)
   {
 
-    PyErr_SetString (PyExc_TypeError, "Cannot delete markov_disable attribute");
+    PyErr_SetString (PyExc_TypeError, "Cannot delete markov attribute");
     return -1;
   }
 
   if (!PyBool_Check (value))
   {
 
-    PyErr_SetString (PyExc_TypeError, "The markov_disable attribute value must be a bool");
+    PyErr_SetString (PyExc_TypeError, "The markov attribute value must be a bool");
     return -1;
   }
 
@@ -3660,14 +3660,14 @@ static int hashcat_setmarkov_disable (hashcatObject * self, PyObject * value, vo
   {
 
     Py_INCREF (value);
-    self->user_options->markov_disable = 1;
+    self->user_options->markov = 1;
 
   }
   else
   {
 
     Py_INCREF (value);
-    self->user_options->markov_disable = 0;
+    self->user_options->markov = 0;
 
   }
 
@@ -3966,32 +3966,32 @@ static int hashcat_setbackend_vector_width (hashcatObject * self, PyObject * val
 
 }
 
-PyDoc_STRVAR(optimized_kernel_enable__doc__,
-"optimized_kernel_enable\tbool\tEnable optimized kernel (-O)\n\n");
+PyDoc_STRVAR(optimized_kernel__doc__,
+"optimized_kernel\tbool\tEnable optimized kernel (-O)\n\n");
 
-// getter - optimized_kernel_enable 
-static PyObject *hashcat_getoptimized_kernel_enable(hashcatObject * self)
+// getter - optimized_kernel 
+static PyObject *hashcat_getoptimized_kernel(hashcatObject * self)
 {
 
-  return PyBool_FromLong (self->user_options->optimized_kernel_enable);
+  return PyBool_FromLong (self->user_options->optimized_kernel);
 
 }
 
-// setter - optimized_kernel_enable
-static int hashcat_setoptimized_kernel_enable(hashcatObject * self, PyObject * value, void *closure)
+// setter - optimized_kernel
+static int hashcat_setoptimized_kernel(hashcatObject * self, PyObject * value, void *closure)
 {
 
   if (value == NULL)
   {
 
-    PyErr_SetString (PyExc_TypeError, "Cannot delete optimized_kernel_enable attribute");
+    PyErr_SetString (PyExc_TypeError, "Cannot delete optimized_kernel attribute");
     return -1;
   }
 
   if (!PyBool_Check (value))
   {
 
-    PyErr_SetString (PyExc_TypeError, "The optimized_kernel_enable attribute value must be a bool");
+    PyErr_SetString (PyExc_TypeError, "The optimized_kernel attribute value must be a bool");
     return -1;
   }
 
@@ -3999,14 +3999,14 @@ static int hashcat_setoptimized_kernel_enable(hashcatObject * self, PyObject * v
   {
 
     Py_INCREF (value);
-    self->user_options->optimized_kernel_enable = 1;
+    self->user_options->optimized_kernel = 1;
 
   }
   else
   {
 
     Py_INCREF (value);
-    self->user_options->optimized_kernel_enable= 0;
+    self->user_options->optimized_kernel= 0;
 
   }
 
@@ -4237,32 +4237,32 @@ static int hashcat_setoutfile_format (hashcatObject * self, PyObject * value, vo
 
 }
 
-PyDoc_STRVAR(potfile_disable__doc__,
-"potfile_disable\tbool\tDo not write potfile\n\n");
+PyDoc_STRVAR(potfile__doc__,
+"potfile\tbool\tDo not write potfile\n\n");
 
-// getter - potfile_disable
-static PyObject *hashcat_getpotfile_disable (hashcatObject * self)
+// getter - potfile
+static PyObject *hashcat_getpotfile (hashcatObject * self)
 {
 
-  return PyBool_FromLong (self->user_options->potfile_disable);
+  return PyBool_FromLong (self->user_options->potfile);
 
 }
 
-// setter - potfile_disable
-static int hashcat_setpotfile_disable (hashcatObject * self, PyObject * value, void *closure)
+// setter - potfile
+static int hashcat_setpotfile (hashcatObject * self, PyObject * value, void *closure)
 {
 
   if (value == NULL)
   {
 
-    PyErr_SetString (PyExc_TypeError, "Cannot delete potfile_disable attribute");
+    PyErr_SetString (PyExc_TypeError, "Cannot delete potfile attribute");
     return -1;
   }
 
   if (!PyBool_Check (value))
   {
 
-    PyErr_SetString (PyExc_TypeError, "The potfile_disable attribute value must be a bool");
+    PyErr_SetString (PyExc_TypeError, "The potfile attribute value must be a bool");
     return -1;
   }
 
@@ -4270,14 +4270,14 @@ static int hashcat_setpotfile_disable (hashcatObject * self, PyObject * value, v
   {
 
     Py_INCREF (value);
-    self->user_options->potfile_disable = 1;
+    self->user_options->potfile = 1;
 
   }
   else
   {
 
     Py_INCREF (value);
-    self->user_options->potfile_disable = 0;
+    self->user_options->potfile = 0;
 
   }
 
@@ -4516,32 +4516,32 @@ static int hashcat_setrestore (hashcatObject * self, PyObject * value, void *clo
 
 }
 
-PyDoc_STRVAR(restore_disable__doc__,
-"restore_disable\tbool\tDo not write restore file\n\n");
+PyDoc_STRVAR(restore_enable__doc__,
+"restore_enable\tbool\tDo not write restore file\n\n");
 
-// getter - restore_disable
-static PyObject *hashcat_getrestore_disable (hashcatObject * self)
+// getter - restore_enable
+static PyObject *hashcat_getrestore_enable (hashcatObject * self)
 {
 
-  return PyBool_FromLong (self->user_options->restore_disable);
+  return PyBool_FromLong (self->user_options->restore_enable);
 
 }
 
-// setter - restore_disable
-static int hashcat_setrestore_disable (hashcatObject * self, PyObject * value, void *closure)
+// setter - restore_enable
+static int hashcat_setrestore_enable (hashcatObject * self, PyObject * value, void *closure)
 {
 
   if (value == NULL)
   {
 
-    PyErr_SetString (PyExc_TypeError, "Cannot delete restore_disable attribute");
+    PyErr_SetString (PyExc_TypeError, "Cannot delete restore_enable attribute");
     return -1;
   }
 
   if (!PyBool_Check (value))
   {
 
-    PyErr_SetString (PyExc_TypeError, "The restore_disable attribute value must be a bool");
+    PyErr_SetString (PyExc_TypeError, "The restore_enable attribute value must be a bool");
     return -1;
   }
 
@@ -4549,14 +4549,14 @@ static int hashcat_setrestore_disable (hashcatObject * self, PyObject * value, v
   {
 
     Py_INCREF (value);
-    self->user_options->restore_disable = 1;
+    self->user_options->restore_enable = 1;
 
   }
   else
   {
 
     Py_INCREF (value);
-    self->user_options->restore_disable = 0;
+    self->user_options->restore_enable = 0;
 
   }
 
@@ -6057,7 +6057,7 @@ static PyGetSetDef hashcat_getseters[] = {
   {"debug_mode", (getter) hashcat_getdebug_mode, (setter) hashcat_setdebug_mode, debug_mode__doc__, NULL},
   {"force", (getter) hashcat_getforce, (setter) hashcat_setforce, force__doc__, NULL},
   {"hwmon_temp_abort", (getter) hashcat_gethwmon_temp_abort, (setter) hashcat_sethwmon_temp_abort, hwmon_temp_abort__doc__, NULL},
-  {"hwmon_disable", (getter) hashcat_gethwmon_disable, (setter) hashcat_sethwmon_disable, hwmon_disable__doc__, NULL},
+  {"hwmon", (getter) hashcat_gethwmon, (setter) hashcat_sethwmon, hwmon__doc__, NULL},
   {"hash_mode", (getter) hashcat_gethash_mode, (setter) hashcat_sethash_mode, hash_mode__doc__, NULL},
   {"hex_charset", (getter) hashcat_gethex_charset, (setter) hashcat_sethex_charset, hex_charset__doc__, NULL},
   {"hex_salt", (getter) hashcat_gethex_salt, (setter) hashcat_sethex_salt, hex_salt__doc__, NULL},
@@ -6072,11 +6072,11 @@ static PyGetSetDef hashcat_getseters[] = {
   {"keyspace", (getter) hashcat_getkeyspace, (setter) hashcat_setkeyspace, keyspace__doc__, NULL},
   {"left", (getter) hashcat_getleft, (setter) hashcat_setleft, left__doc__, NULL},
   {"limit", (getter) hashcat_getlimit, (setter) hashcat_setlimit, limit__doc__, NULL},
-  {"logfile_disable", (getter) hashcat_getlogfile_disable, (setter) hashcat_setlogfile_disable, logfile_disable__doc__, NULL},
+  {"logfile", (getter) hashcat_getlogfile, (setter) hashcat_setlogfile, logfile__doc__, NULL},
   {"loopback", (getter) hashcat_getloopback, (setter) hashcat_setloopback, loopback__doc__, NULL},
   {"machine_readable", (getter) hashcat_getmachine_readable, (setter) hashcat_setmachine_readable, machine_readable__doc__, NULL},
   {"markov_classic", (getter) hashcat_getmarkov_classic, (setter) hashcat_setmarkov_classic, markov_classic__doc__, NULL},
-  {"markov_disable", (getter) hashcat_getmarkov_disable, (setter) hashcat_setmarkov_disable, markov_disable__doc__, NULL},
+  {"markov", (getter) hashcat_getmarkov, (setter) hashcat_setmarkov, markov__doc__, NULL},
   {"markov_hcstat2", (getter) hashcat_getmarkov_hcstat2, (setter) hashcat_setmarkov_hcstat2, markov_hcstat2__doc__, NULL},
   {"markov_threshold", (getter) hashcat_getmarkov_threshold, (setter) hashcat_setmarkov_threshold, markov_threshold__doc__, NULL},
   {"spin_damp", (getter) hashcat_getspin_damp, (setter) hashcat_setspin_damp, spin_damp__doc__, NULL},
@@ -6084,19 +6084,19 @@ static PyGetSetDef hashcat_getseters[] = {
   {"backend_devices", (getter) hashcat_getbackend_devices, (setter) hashcat_setbackend_devices, backend_devices__doc__, NULL},
   {"backend_info", (getter) hashcat_getbackend_info, (setter) hashcat_setbackend_info, backend_info__doc__, NULL},
   {"backend_vector_width", (getter) hashcat_getbackend_vector_width, (setter) hashcat_setbackend_vector_width, backend_vector_width__doc__, NULL},
-  {"optimized_kernel_enable", (getter) hashcat_getoptimized_kernel_enable, (setter) hashcat_setoptimized_kernel_enable, optimized_kernel_enable__doc__, NULL},
+  {"optimized_kernel", (getter) hashcat_getoptimized_kernel, (setter) hashcat_setoptimized_kernel, optimized_kernel__doc__, NULL},
   {"outfile", (getter) hashcat_getoutfile, (setter) hashcat_setoutfile, outfile__doc__, NULL},
   {"outfile_autohex", (getter) hashcat_getoutfile_autohex, (setter) hashcat_setoutfile_autohex, outfile_autohex__doc__, NULL},
   {"outfile_check_dir", (getter) hashcat_getoutfile_check_dir, (setter) hashcat_setoutfile_check_dir, outfile_check_dir__doc__, NULL},
   {"outfile_check_timer", (getter) hashcat_getoutfile_check_timer, (setter) hashcat_setoutfile_check_timer, outfile_check_timer__doc__, NULL},
   {"outfile_format", (getter) hashcat_getoutfile_format, (setter) hashcat_setoutfile_format, outfile_format__doc__, NULL},
-  {"potfile_disable", (getter) hashcat_getpotfile_disable, (setter) hashcat_setpotfile_disable, potfile_disable__doc__, NULL},
+  {"potfile", (getter) hashcat_getpotfile, (setter) hashcat_setpotfile, potfile__doc__, NULL},
   {"potfile_path", (getter) hashcat_getpotfile_path, (setter) hashcat_setpotfile_path, potfile_path__doc__, NULL},
   {"quiet", (getter) hashcat_getquiet, (setter) hashcat_setquiet, quiet__doc__, NULL},
   {"remove", (getter) hashcat_getremove, (setter) hashcat_setremove, remove__doc__, NULL},
   {"remove_timer", (getter) hashcat_getremove_timer, (setter) hashcat_setremove_timer, remove_timer__doc__, NULL},
   {"restore", (getter) hashcat_getrestore, (setter) hashcat_setrestore, restore__doc__, NULL},
-  {"restore_disable", (getter) hashcat_getrestore_disable, (setter) hashcat_setrestore_disable, restore_disable__doc__, NULL},
+  {"restore_enable", (getter) hashcat_getrestore_enable, (setter) hashcat_setrestore_enable, restore_enable__doc__, NULL},
   {"restore_file_path", (getter) hashcat_getrestore_file_path, (setter) hashcat_setrestore_file_path, restore_file_path__doc__, NULL},
   {"restore_timer", (getter) hashcat_getrestore_timer, (setter) hashcat_setrestore_timer, restore_timer__doc__, NULL},
   {"rp_files_cnt", (getter) hashcat_getrp_files_cnt, (setter) hashcat_setrp_files_cnt, rp_files_cnt__doc__, NULL},
